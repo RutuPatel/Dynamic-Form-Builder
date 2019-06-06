@@ -1,0 +1,66 @@
+﻿<div id="contact" class="content-section-a" style="padding-top: 50px;">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 col-md-offset-3 text-center wrap_title">
+                <h2>Contact Us</h2>
+            </div>
+
+            <form role="form" action="" method="post">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="InputName">Your Name</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="InputName" id="InputName" placeholder="Enter Name" required>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-ok form-control-feedback"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="InputEmail">Your Email</label>
+                        <div class="input-group">
+                            <input type="email" class="form-control" id="InputEmail" name="InputEmail" placeholder="Enter Email" required>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-ok form-control-feedback"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="InputMessage">Message</label>
+                        <div class="input-group">
+                            <textarea name="InputMessage" id="InputMessage" class="form-control" rows="4" required></textarea>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-ok form-control-feedback"></i></span>
+                        </div>
+                    </div>
+                    <a href="@Url.Action("Thanks","Home")">
+                        <input type="submit" name="submit" id="submit" value="Submit" class="btn wow tada btn-embossed btn-primary pull-right">
+                    </a>
+                </div>
+            </form>
+
+            <hr class="featurette-divider hidden-lg">
+            <div class="col-md-5 col-md-push-1 address">
+                <address>
+                    <h3>Office Location</h3>
+                    <p class="lead">
+                        <a href="https://goo.gl/maps/bUXsPPwiGnp">
+                            126/127 Baronet Complex<br>
+                            Opp. Sabarmati Police Station<br />
+                            Ram Nagar Toll Naka,Sabarmati<br />
+                            Ahmedabad, Gujarat 380005, India
+                        </a><br>
+                        Phone: 787-404-8202<br>
+                        Email: info.formbuilder@gmail.com
+                    </p>
+                </address>
+
+                <h3>Social</h3>
+                <li class="social">
+                    <a href="https://twitter.com/aavitech"><i class="fa fa-facebook-square fa-size"> </i></a>
+                    <a href="https://www.facebook.com/aavitech/?fref=ts"><i class="fa  fa-twitter-square fa-size"> </i> </a>
+                    <a href="https://plus.google.com/u/0/+Aavitechsolutions"><i class="fa fa-google-plus-square fa-size"> </i></a>
+                    <a href="https://www.linkedin.com/company/aavitech-solutions-private-limited?trk=top_nav_home"><i class="fa fa-linkedin-square fa-size"> </i> </a>
+                </li>
+            </div>
+        </div>
+    </div>
+</div>

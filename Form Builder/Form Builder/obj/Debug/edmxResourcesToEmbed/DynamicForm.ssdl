@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DynamicFormModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Form">
+    <Key>
+      <PropertyRef Name="FormId" />
+    </Key>
+    <Property Name="UserId" Type="int" />
+    <Property Name="FormId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FormName" Type="nvarchar" MaxLength="50" />
+    <Property Name="FormDescription" Type="nvarchar(max)" />
+    <Property Name="FormUrl" Type="nvarchar(max)" />
+    <Property Name="HashUrl" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="FormDetail">
+    <Key>
+      <PropertyRef Name="FormDetailId" />
+    </Key>
+    <Property Name="FormDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FormId" Type="int" />
+    <Property Name="Id" Type="int" />
+    <Property Name="FieldType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FieldName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Isrequired" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Sortindex" Type="int" Nullable="false" />
+    <Property Name="Icons" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Class" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FormField">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FieldName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FieldType" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsRequired" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SortIndex" Type="int" Nullable="false" />
+    <Property Name="Icons" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Class" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Response">
+    <Key>
+      <PropertyRef Name="ResponseId" />
+    </Key>
+    <Property Name="ResponseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" />
+    <Property Name="FormName" Type="nvarchar" MaxLength="50" />
+    <Property Name="FormId" Type="int" />
+    <Property Name="UserEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="FieldType" Type="nvarchar" MaxLength="50" />
+    <Property Name="FieldName" Type="nvarchar" MaxLength="50" />
+    <Property Name="FieldResponse" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="ResponseForm">
+    <Key>
+      <PropertyRef Name="ResponseFormID" />
+    </Key>
+    <Property Name="ResponseFormID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FormId" Type="int" Nullable="false" />
+    <Property Name="FormName" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="ForgotPasswodID" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="GUID" Type="uniqueidentifier" />
+  </EntityType>
+  <Association Name="FK_Form_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Form" Type="Self.Form" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Form">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FormDetail_Form">
+    <End Role="Form" Type="Self.Form" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="FormDetail" Type="Self.FormDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Form">
+        <PropertyRef Name="FormId" />
+      </Principal>
+      <Dependent Role="FormDetail">
+        <PropertyRef Name="FormId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FormDetail_FormField">
+    <End Role="FormField" Type="Self.FormField" Multiplicity="0..1" />
+    <End Role="FormDetail" Type="Self.FormDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FormField">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FormDetail">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Response_Form">
+    <End Role="Form" Type="Self.Form" Multiplicity="0..1" />
+    <End Role="Response" Type="Self.Response" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Form">
+        <PropertyRef Name="FormId" />
+      </Principal>
+      <Dependent Role="Response">
+        <PropertyRef Name="FormId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Response_FormField">
+    <End Role="FormField" Type="Self.FormField" Multiplicity="0..1" />
+    <End Role="Response" Type="Self.Response" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FormField">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Response">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ResponseForm_Form">
+    <End Role="Form" Type="Self.Form" Multiplicity="1" />
+    <End Role="ResponseForm" Type="Self.ResponseForm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Form">
+        <PropertyRef Name="FormId" />
+      </Principal>
+      <Dependent Role="ResponseForm">
+        <PropertyRef Name="FormId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DynamicFormModelStoreContainer">
+    <EntitySet Name="Form" EntityType="Self.Form" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FormDetail" EntityType="Self.FormDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FormField" EntityType="Self.FormField" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Response" EntityType="Self.Response" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResponseForm" EntityType="Self.ResponseForm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Form_User" Association="Self.FK_Form_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Form" EntitySet="Form" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FormDetail_Form" Association="Self.FK_FormDetail_Form">
+      <End Role="Form" EntitySet="Form" />
+      <End Role="FormDetail" EntitySet="FormDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FormDetail_FormField" Association="Self.FK_FormDetail_FormField">
+      <End Role="FormField" EntitySet="FormField" />
+      <End Role="FormDetail" EntitySet="FormDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Response_Form" Association="Self.FK_Response_Form">
+      <End Role="Form" EntitySet="Form" />
+      <End Role="Response" EntitySet="Response" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Response_FormField" Association="Self.FK_Response_FormField">
+      <End Role="FormField" EntitySet="FormField" />
+      <End Role="Response" EntitySet="Response" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ResponseForm_Form" Association="Self.FK_ResponseForm_Form">
+      <End Role="Form" EntitySet="Form" />
+      <End Role="ResponseForm" EntitySet="ResponseForm" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,58 @@
+﻿@using WebApplication1.Models
+@model FormFieldModel
+<script>
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+</script>
+@if (!Model.IsRunMode)
+{
+    <div id="ContactBoxDiv" class="container col-md-12" style="background-color:#f7f6d4;height:80px;padding-top:15px;">
+        <div class="col-md-10">
+            <div class="container col-md-5">
+                <form id="CB">
+                    <div class="form-group">
+                        <br />
+                        <label>Contact</label>
+                        <br /><br /><br /><br />
+                        <input type="text" class="form-control" onkeypress="return isNumber(event)" disabled="disabled" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        @Html.Partial("_ButtonPanel", Model)
+    </div>
+}
+else
+{
+    <div class="form-row">
+        <label><span style="font-size:20px">Contact</span></label>
+        <div class="form-radio-buttons">
+            <div>
+                <label>
+                    @Html.TextBoxFor(model=>model.FieldResponse,new { onkeypress = "return isNumber(event)", placeholder = "Enter Mobile Number", type="text", @class= "form-control ContactTxt" })
+                    <div class="contactReqTxt" style="color:red;font-size:12px"></div>
+                </label>
+            </div>           
+        </div>
+    </div>
+  
+    @*<div id="ContactBoxDiv" class="container col-md-12" style="background-color:#f7f6d4;">
+        <div class="col-md-10">
+            <div class="container col-md-7">
+                <form id="CB">
+                    <div class="form-group">                        
+                        <label  style="color:#1abc9c;font-size:16px">Contact</label>
+                        <input type="text" class="form-control" onkeypress="return isNumber(event)" placeholder="Enter Mobile Number" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>*@
+}
+

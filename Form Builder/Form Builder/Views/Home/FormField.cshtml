@@ -1,0 +1,231 @@
+﻿@*@model WebApplication1.Models.FormFieldModel*@
+@using WebApplication1.Models
+@using Form_Builder.Helper
+@{
+    if (ViewContext.FormContext == null)
+    {
+        ViewContext.FormContext = new FormContext();
+    }
+
+}
+@model FormFieldModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Form Builder</title>
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+    <link href="~/Resources/css/animate.css" rel="stylesheet">
+
+    <script>
+        function GetContent(url)
+        {
+            $.get(url, function (data) {
+                $("#result").append(data);
+                $(".delete").click(function(){
+                    $(this).parent().parent().remove();
+                });
+            });
+        }
+    </script>
+    <script>
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text/html");
+            var element = document.getElementById(data);
+            $.ajax({
+                url: element.href,
+                cache: false,
+                success: function (html) {
+                    $("#result").append(html);
+                    $(".delete").click(function () {
+                        $(this).parent().parent().remove();
+                    });
+                    //$(".append").click(function () {
+                    //    $("#result").append(data);
+                    //});
+                }
+            });
+            return false;
+        }
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+        function drag(ev) {
+            ev.dataTransfer.setData("text/html", ev.target.id);
+        }
+    </script>
+  
+</head>
+
+<body>
+    <div class="editorRow">        
+        @using (Html.BeginCollectionItem("formField"))
+        {
+            @Html.HiddenFor(x => x.FormDetailId);
+            @Html.HiddenFor(x => x.FieldType);
+            @Html.HiddenFor(x => x.Id);
+            @Html.HiddenFor(x => x.FieldName);
+            @Html.HiddenFor(x => x.IsRequired);
+            @*@Html.HiddenFor(x => x.SortIndex);*@
+            @Html.HiddenFor(x => x.Icons);
+            @Html.HiddenFor(x => x.Class);
+
+            switch (Model.FieldType)
+            {
+                case "TextBox":
+                    @Html.Partial("TextBox",Model)
+                    break;
+                case "TextArea":
+                    @Html.Partial("TextArea", Model)
+                    break;
+                case "Radio":
+                    @Html.Partial("Radio", Model)
+                    break;
+                case "Phone":
+                    @Html.Partial("Phone", Model)
+                    break;
+                case "Name":
+                    @Html.Partial("Name", Model)
+                    break;
+                case "FileUpload":
+                    @Html.Partial("FileUpload", Model)
+                    break;
+                case "DropDown":
+                    @Html.Partial("DropDown", Model)
+                    break;
+                case "CheckBox":
+                    @Html.Partial("CheckBox", Model)
+                    break;
+                case "Address":
+                    @Html.Partial("Address", Model)
+                    break;
+                case "Date":
+                    @Html.Partial("Date", Model)
+                    break;
+                case "Time":
+                    @Html.Partial("Time", Model)
+                    break;
+                case "Email":
+                    @Html.Partial("Email", Model)
+                    break;
+            }
+        }
+ </div>
+    @*<div id="TextBoxDiv" class="container col-md-12" style="background-color:#f7f6d4">
+        <div class="col-md-10">
+            <div class="container col-md-5">
+                <form>
+                    <div class="form-group">
+                        <br /> 
+                        <label>Untitled Field</label>                      
+                        @Html.TextBoxFor(model => model.FieldType , new { @class = "form-control input-md", @placeholder = "Enter name" })
+                   </div>
+                </form>
+            </div>
+        </div>
+        @Html.Partial("_ButtonPanel")
+    </div>*@
+
+
+    @*<div class="container-fluid col-md-12" style="padding-left: 0px;padding-right: 0px;">
+        <div class="container col-md-12 " style="background-color:#34495e">
+            <div class="col-md-2">
+                <a href="@Url.Action("Index","Home")">
+                    <img src="~/Resources/img/Logo/form_builder_logo.png" style="height:55px" />
+                </a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white">
+                        Account
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="navbar-content">
+                                <div class="row">
+                                    <div class="col-md-5 img-responsive img-circle">
+                                        <input type="image" src="~/Resources/img/final.jpg"
+                                               alt="Alternate Text" class="img-responsive img-circle" />
+                                        <input type="file" id="my_file" style="display:none" />
+                                        <p class="text-center small">
+
+                                            <a href="#">Change Photo</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <span>Name</span>
+                                        <p class="text-muted small">
+                                            Someone@example.com
+                                        </p>
+                                        <div class="divider">
+                                        </div>
+                                        <a href="#">Account Settings <span class="glyphicon glyphicon-cog pull-right" style="padding-top: 5px;"></span></a>
+                                        <div class="divider">
+                                        </div>
+                                        <a href="#"><span class="glyphicon glyphicon-user pull-right" style="padding-top: 5px;"></span>View Profile</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="navbar-footer">
+                                <div class="navbar-footer-content">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a href="@Url.Action("Reset","Home")" class="btn btn-default btn-sm" style="background-color:#34495e">Change Passowrd</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="@Url.Action("Index","Home")" class="btn btn-default btn-sm pull-right" style="background-color:#34495e">Sign Out</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="container col-md-12" style="padding-left: 0px;padding-right: 0px;">
+            <div class="col-md-3" style="background-color:#f7f6d4;padding-left: 5px; height:590px;padding-right:5px;">
+                <div class="container col-md-12" style="padding-left: 6px;padding-right:0px;">
+                    <ul class="nav nav-pills">
+                        <br />
+                        <li class="active"><a data-toggle="pill" href="#home" style="width:100px;font-size:14px;line-height:1">Add Field</a></li>
+                        <li><a data-toggle="pill" href="#menu1" style="width:100px;font-size:14px;line-height:1">Edit Field</a></li>
+                        <li><a data-toggle="pill" href="#menu2" style="width:100px;font-size:14px;line-height:1">Form Field</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active">
+
+                            @foreach (var item in fields.OrderBy(x => x.SortIndex))
+                            {
+                                <div class="col-md-6" style="padding-left: 15px;padding-top: 10px;">
+
+                                    <a id="@item.Id" type="@item.FieldType" class="btn button button4" onclick="GetContent('@Url.Action("GetField", "Home",new {type= item.FieldType, fieldId = item.Id })'); return false;" href="@Url.Action(@item.FieldType, "Home")" draggable="true" ondragstart="drag(event)" style="vertical-align:middle;width:123px;padding-left: 10px;font-size:12px" >
+                                        <span class="@item.Icons network-name"></span>&nbsp;<span class="text-center"> @item.FieldName</span>
+                                    </a>
+                                    <br />
+                                </div>
+                            }
+                        </div>
+                        <div id="menu1" class="tab-pane fade" style="padding-left: 0px;padding-top: 10px;"></div>
+                        <div id="menu2" class="tab-pane fade" style="padding-left: 0px;padding-top: 10px;">
+                            <footer class="col-md-12" style="background-color:#f7f6d4; padding-left: 0px; padding-right: 0px;">
+                                <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                                    <a id="ClearBtn" class="btn button button4" style="background-color:#5dade2;width:150px"><i class="fa fa-times"></i>Reset</a>
+                                </div>
+                                <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                                    <a id="SaveBtn1" onclick="Submitform()"  class="btn button button4 buttonsubmit" style="background-color:#5dade2"><i class="fa fa-check"></i>Save Form</a>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>*@
+</body>
+</html>

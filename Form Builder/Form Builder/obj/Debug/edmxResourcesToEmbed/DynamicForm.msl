@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DynamicFormModelStoreContainer" CdmEntityContainer="DynamicFormEntities">
+    <EntitySetMapping Name="Forms">
+      <EntityTypeMapping TypeName="DynamicFormModel.Form">
+        <MappingFragment StoreEntitySet="Form">
+          <ScalarProperty Name="HashUrl" ColumnName="HashUrl" />
+          <ScalarProperty Name="FormUrl" ColumnName="FormUrl" />
+          <ScalarProperty Name="FormDescription" ColumnName="FormDescription" />
+          <ScalarProperty Name="FormName" ColumnName="FormName" />
+          <ScalarProperty Name="FormId" ColumnName="FormId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FormDetails">
+      <EntityTypeMapping TypeName="DynamicFormModel.FormDetail">
+        <MappingFragment StoreEntitySet="FormDetail">
+          <ScalarProperty Name="Class" ColumnName="Class" />
+          <ScalarProperty Name="Icons" ColumnName="Icons" />
+          <ScalarProperty Name="Sortindex" ColumnName="Sortindex" />
+          <ScalarProperty Name="Isrequired" ColumnName="Isrequired" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+          <ScalarProperty Name="FieldType" ColumnName="FieldType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FormId" ColumnName="FormId" />
+          <ScalarProperty Name="FormDetailId" ColumnName="FormDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FormFields">
+      <EntityTypeMapping TypeName="DynamicFormModel.FormField">
+        <MappingFragment StoreEntitySet="FormField">
+          <ScalarProperty Name="Class" ColumnName="Class" />
+          <ScalarProperty Name="Icons" ColumnName="Icons" />
+          <ScalarProperty Name="SortIndex" ColumnName="SortIndex" />
+          <ScalarProperty Name="IsRequired" ColumnName="IsRequired" />
+          <ScalarProperty Name="FieldType" ColumnName="FieldType" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Responses">
+      <EntityTypeMapping TypeName="DynamicFormModel.Response">
+        <MappingFragment StoreEntitySet="Response">
+          <ScalarProperty Name="FieldResponse" ColumnName="FieldResponse" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+          <ScalarProperty Name="FieldType" ColumnName="FieldType" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="FormId" ColumnName="FormId" />
+          <ScalarProperty Name="FormName" ColumnName="FormName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ResponseId" ColumnName="ResponseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResponseForms">
+      <EntityTypeMapping TypeName="DynamicFormModel.ResponseForm">
+        <MappingFragment StoreEntitySet="ResponseForm">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="FormName" ColumnName="FormName" />
+          <ScalarProperty Name="FormId" ColumnName="FormId" />
+          <ScalarProperty Name="ResponseFormID" ColumnName="ResponseFormID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="DynamicFormModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="GUID" ColumnName="GUID" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ForgotPasswodID" ColumnName="ForgotPasswodID" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

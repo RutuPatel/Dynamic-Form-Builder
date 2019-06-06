@@ -1,0 +1,111 @@
+﻿@using WebApplication1.Models
+@model FormModel
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+    var fields = (List<FormFieldModel>)ViewBag.FormField;
+}
+@{
+    if (ViewContext.FormContext == null)
+    {
+        ViewContext.FormContext = new FormContext();
+    }
+}
+
+<head>   
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#result").sortable();
+
+        });
+    </script>
+    <style>
+        #result {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+            html > body #result div {
+                height: 3.0em;
+                line-height: 0.3em;
+            }
+
+        .ui-state-highlight {
+            height: 1.5em;
+            line-height: 1.2em;
+        }
+    </style>
+</head>
+
+@using (Html.BeginForm("Submit", "Home", FormMethod.Post, new { id = "dynamicForm" }))
+{
+    @Html.HiddenFor(m => m.FormId)
+    @Html.HiddenFor(m=>m.UserId)
+    @*@Html.HiddenFor(m => m.FormName)
+        @Html.HiddenFor(m => m.FormDescription)*@
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="col-md-3" style="background-color:#ffffff"></div>
+
+    <div class="col-md-9" style="background-color:#ffffff;">
+        <div class="col-md-12" style="padding-top: 15px;padding-bottom: 0px;padding-left: 0px;">
+            <a href="#">
+                <div class="col-md-3" style="padding-left: 0px;">
+                    <h3>Form Name</h3>
+                    @Html.TextBoxFor(model => model.FormName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FormName, "", new { @style = "color:#1abc9c" })
+                </div>
+                <div class="col-md-9" style="padding-left: 0px;">
+                    <h3>Form Description</h3>
+                    @Html.TextBoxFor(model => model.FormDescription, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FormDescription, "", new { @style = "color:#1abc9c" })
+                </div>
+                <div class="col-md-12" style="padding-left: 0px;"><hr /></div>
+            </a>
+        </div>
+        <div class="col-md-12" id="result" ondrop="drop(event)" ondragover="allowDrop(event)">
+            @if (Model.formField.Count > 0)
+            {
+                foreach (var item in Model.formField.OrderBy(x => x.SortIndex))
+                {
+                    Html.RenderPartial("FormField", item);
+                }
+            }
+        </div>
+    </div>
+
+}
+
+@*<div class="modal fade" id="bsModal3" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" style="color: #34495e; margin-top: 200px;">
+                <center>
+                    <div class="modal-body">
+                        <h4 style="color:red">Login required!!!</h4>
+                        <h6>Click OK to login</h6>
+                    </div>
+                    <div class="form-group">
+                        <a href="@Url.Action("Login","Home")" type="button" class="btn btn-success bt-md" style="background-color:#34495e">OK</a>
+                        <button type="button" class="btn" data-dismiss="modal" style="background-color:#48c9b0">cancel</button>
+                    </div>
+                </center>
+                <br />
+            </div>
+        </div>
+    </div>
+        <script>
+            $("#bsModal3").modal('show');
+        </script>*@
+
+
+
+
+
+
+
+

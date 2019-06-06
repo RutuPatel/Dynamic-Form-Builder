@@ -1,0 +1,82 @@
+﻿@using WebApplication1.Models
+@model FormFieldModel
+
+
+@if (!Model.IsRunMode)
+{
+    <div id="NameDiv" class="container col-md-12" style="background-color:#f7f6d4;height:100px;padding-top:15px;">
+        <div class="container col-md-10">
+            <div class="col-md-5" style="padding-bottom: 20px;">
+                <form id="NA">
+                    <div class="form-group">
+                        <br />
+                        <label>Untitled</label>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <div class="col-md-6" style="padding-left: 0px; padding-right: 7px;">
+                            <label style="font-weight:100!important">First</label>
+                            <input type="text" class="form-control" disabled="disabled" name="firstname">
+                        </div>
+                        <div class="col-md-6" style="padding-left: 7px; padding-right: 0px;">
+                            <label style="font-weight:100!important">Last</label>
+                            <input type="text" class="form-control" disabled="disabled" name="lastname">
+                        </div>
+                        <br />
+                    </div>
+                </form>
+            </div>
+        </div>
+        @Html.Partial("_ButtonPanel", Model)
+    </div>
+}
+else
+{
+    <div class="form-row">
+        <label style="font-size:20px"><span>Name</span></label>
+        <div class="form-radio-buttons">
+            <div>               
+                <label>
+                    <label>First</label>
+                    <input   onblur = "validateFirst(this)" type="text" class="form-control FirstName" name="FirstName"  placeholder = "Enter Given Name">
+                    @*@Html.TextBoxFor(model => model.FirstName, new { @id = "FirstName", name = "name", placeholder = "Enter Given Name", type = "text", @class = "form-control" })*@
+                    <div class="FirstReqTxt" style="color:red;font-size:12px"></div>                   
+                </label>
+            </div>
+            <div>
+                <label>
+                    <label>Last</label>
+                    <input type="text" class="form-control lastNametxt" name="LastName" placeholder="Enter Given Name">
+                    @*@Html.TextBoxFor(model => model.LastName, new { placeholder = "Enter Family Name", type = "text", @class = "form-control lastNametxt" })*@
+                    <div class="lastReqTxt" style="color:red;font-size:12px"></div>
+                    @*<input type="text" class="form-control" name="lastname">*@
+                </label>
+            </div>
+        </div>
+
+    </div>
+
+    @*<div id="NameDiv" class="container col-md-12" style="background-color:#f7f6d4;">
+            <div class="container col-md-10">
+                <div class="col-md-8">
+                    <form id="NA">
+                        <div class="form-group">
+                            <label style="color:#1abc9c;font-size:16px">Name</label>
+                            <br />
+                            <div class="col-md-6" style="padding-left: 0px;">
+                                <label>First</label>
+                                <input type="text" class="form-control" name="firstname">
+                            </div>
+                            <div class="col-md-6" style="padding-left: 0px;">
+                                <label>Last</label>
+                                <input type="text" class="form-control"  name="lastname">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>*@
+}
+

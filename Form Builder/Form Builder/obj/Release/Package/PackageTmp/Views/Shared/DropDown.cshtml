@@ -1,0 +1,99 @@
+﻿@using WebApplication1.Models
+@model FormFieldModel   
+@if(!Model.IsRunMode)
+{ 
+    <div id="DropDownDiv" class="container col-md-12"style="background-color:#f7f6d4;height:80px;padding-top:15px;">
+        <div class="col-md-10">
+            <div class="container col-md-5">
+                <form id="DD">
+                    <div class="form-group">
+                        <br />
+                        <label>Select a choice</label>
+                        <select class="form-control" disabled="disabled">
+                            <option>--Select--</option>
+                        </select>
+                        <br>
+                    </div>
+                </form>
+            </div>
+        </div>
+        @Html.Partial("_ButtonPanel",Model)
+ </div>
+}
+else
+{
+    <div class="form-row">
+        <label><span style="font-size:20px">Select a Choice</span></label>
+        <div class="form-radio-buttons">    
+            @{
+                List<SelectListItem> listItems = new List<SelectListItem>();
+                listItems.Add(new SelectListItem
+                {
+                    Text =  "--Select Status--",
+                    Value = ""
+                });
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Gujarat",
+                    Value = "Gujarat"
+                });
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Kerala",
+                    Value = "Kerala",
+
+                });
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Delhi",
+                    Value = "Delhi"
+                });
+            }
+
+            @Html.DropDownListFor(model => model.FieldResponse, listItems,new { @class="dropdownTxt"})
+            <div class="dropdownReqTxt" style="color:red;font-size:12px"></div>
+
+       
+                @*<label>                   
+                    <select class="form-control" name="dropdown">
+                        <option>--Select--</option>
+                        <option>Gujarat</option>
+                        <option>Kerala</option>
+                        <option>Delhi</option>
+                    </select>
+                </label>*@
+          
+           
+        </div>
+    </div>
+
+    @*<div class="form-row">
+        <label>
+            <span>Select a choice</span>
+                        <select class="form-control" name="dropdown">
+                <option>--Select--</option>
+                <option>Gujarat</option>
+                <option>Kerala</option>
+                <option>Delhi</option>
+            </select>
+        </label>
+    </div>*@
+
+    @*<div id="DropDownDiv" class="container col-md-12" style="background-color:#f7f6d4;">
+        <div class="col-md-10">
+            <div class="container col-md-7">
+                <form id="DD">
+                    <div class="form-group">                        
+                        <label style="color:#1abc9c;font-size:16px">Select a choice</label>
+                        <select class="form-control" >
+                            <option>--Select--</option>
+                            <option>Gujarat</option>
+                            <option>Kerala</option>
+                            <option>Delhi</option>
+                        </select>                       
+                    </div>
+                </form>
+            </div>
+        </div>       
+    </div>*@
+}

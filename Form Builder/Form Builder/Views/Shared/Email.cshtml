@@ -1,0 +1,64 @@
+﻿@using WebApplication1.Models
+@model FormFieldModel
+
+<script>
+    function validateEmail(emailField) {
+        var reg = /^([A-Za-z0-9_\-\.])+\@@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+        if (reg.test(emailField.value) == false) {
+            $(".emailReqTxt").text("Please enter email as someone@examle.com")
+            return false;
+        }
+        return true;
+    }
+
+</script>
+
+@if (!Model.IsRunMode)
+{
+    <div id="EmailDiv" class="container col-md-12" style="background-color:#f7f6d4;height:80px;padding-top:15px;">
+        <div class="col-md-10">
+            <div class="container col-md-5">
+                <form id="EM">
+                    <div class="form-group">
+                        <br />
+                        <label>Email</label>
+                        <input type="email" class="form-control" id="email" disabled="disabled">
+                    </div>
+                </form>
+            </div>
+        </div>
+        @Html.Partial("_ButtonPanel", Model)
+    </div>
+}
+else
+{
+    <div class="form-row">
+        <label><span style="font-size:20px">Email</span></label>
+        <div class="form-radio-buttons">
+            <div>
+                <label>
+                    <input  onblur = "validateEmail(this)"  type="email" class="form-control EmailTxt" name="Email" id="email" placeholder="someone@exmaple.com">
+                    @*@Html.TextBoxFor(model => model.Email, new { placeholder = "someone@exmaple.com", type = "email", @class = "form-control EmailTxt" })*@
+                    <div class="emailReqTxt" style="color:red;font-size:12px"></div>
+                    @*<input type="email" class="form-control" id="email" placeholder="someone@exmaple.com">*@
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+
+    @*<div id="EmailDiv" class="container col-md-12" style="background-color:#f7f6d4;">
+            <div class="col-md-10">
+                <div class="container col-md-7">
+                    <form id="EM">
+                        <div class="form-group">
+                            <label style="color:#1abc9c;font-size:16px">Email</label><br />
+                            <input type="email" class="form-control" id="email" placeholder="someone@exmaple.com">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>*@
+}

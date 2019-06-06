@@ -1,0 +1,212 @@
+﻿
+
+@using Form_Builder.Models
+@model List<ResponseFormModal>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Response</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script>
+        $(document).ready(function () {
+            $("#btn-response").click(function () {
+                $("#XLSModal").modal('hide');
+            });
+        });
+    </script>
+</head>
+
+<body>
+    @Html.Partial("BuilderNavbar")
+
+    @if (Session["UserEmail"] != null)
+    {
+        <div class="container" style="padding-top:75px;">
+            <div class="row">
+                @if (Model.Count>0)
+                {
+                    <table class="table table-responsive" style="padding-bottom: 0px; margin-top: 70px;background-color:#f3f3f3">
+                        <thead style="color:white;background-color:#1abc9c">
+                            <tr>
+                                <th></th>
+                                <th>#</th>
+                                <th>Form Name</th>
+                                <th>Email Address</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.ActionLink("Export", "ExporttoExcel", new { @FormId=item.FormId, @class="fa fa-file-excel-o fa-lg" ,@style="text-decoration:none;"})
+                                    </td>
+                                    <td style="padding: 0px 0px 0px 15px;">@item.ResponseFormID</td>
+                                    <td style="padding: 5px 0px 0px 10px;">@item.FormName</td>
+                                    <td style="padding: 5px 0px 0px 10px;">@item.UserEmail</td>
+                                    <td style="padding: 5px 0px 0px 10px;">@item.Name</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div><!--/row -->
+            @*<a href="#" class="btn btn-success " data-toggle="modal" data-target="#XLSModal"><span style="color:whitesmoke">Export to Excel</span></a>*@
+        </div>
+
+        <div class="modal fade" id="XLSModal" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="color: #34495e; margin-top: 200px;">
+                    <center>
+                        <div class="modal-body">
+                            <img src="~/Resources/img/Drag/Excel-icon.png" />
+                            <h4 style="color:red">Export to .xls</h4>
+                        </div>
+                        <div class="form-group">
+                            <a href="@Url.Action("ExporttoExcel","Home")" onclick="myresponse()" id="btn-response" type="button" class="btn btn-success">OK</a>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+
+                        </div>
+                    </center>
+                    <br />
+                </div>
+            </div>
+        </div>
+        @Html.Partial("ResponseSnackbar")
+        <div class="modal fade" id="pdfModal" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="color: #34495e; margin-top: 200px;">
+                    <center>
+                        <div class="modal-body">
+                            <img src="~/Resources/img/Drag/128x128-pdf.png" />
+                            <h4 style="color:red">Export to pdf</h4>
+                        </div>
+                        <div class="form-group">
+                            <a href="#" type="button" class="btn btn-success">OK</a>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+
+                        </div>
+                    </center>
+                    <br />
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="DocModal" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="color: #34495e; margin-top: 200px;">
+                    <center>
+                        <div class="modal-body">
+                            <img src="~/Resources/img/Drag/word.png" />
+                            <h4 style="color:red">Export to .doc</h4>
+                        </div>
+                        <div class="form-group">
+                            <a href="#" type="button" class="btn btn-success">OK</a>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+
+                        </div>
+                    </center>
+                    <br />
+                </div>
+            </div>
+        </div>
+        <!-- end container -->
+    }
+    else
+    {
+        <div class="modal fade" id="bsModal3" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="color: #34495e; margin-top: 200px;">
+                    <center>
+                        <div class="modal-body">
+                            <h4 style="color:red">Login Required</h4>
+                            <h6>Click OK to login</h6>
+                        </div>
+                        <div class="form-group">
+                            <a href="@Url.Action("Login","Home")" type="button" class="btn btn-success">OK</a>
+                            <a href="@Url.Action("Index","Home")" type="button" class="btn btn-primary">Cancel</a>
+                        </div>
+                    </center>
+                    <br />
+                </div>
+            </div>
+        </div>
+        <script>
+            $("#bsModal3").modal('show');
+        </script>
+    }
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        @Html.Partial("BuilderNavbar")
+
+        <table class="table table-bordered table-" style="padding-bottom: 0px; margin-top: 100px;">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>mdmsdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>TwBomflkmslotstrap</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>twisdmflsdtter</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+    </html>*@
+
+

@@ -1,0 +1,133 @@
+﻿
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="Flatfy Free Flat and Responsive HTML5 Template ">    <!-- Custom Google Web Font -->
+    <meta name="author" content="">
+
+    <title>Form Builder</title>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="@Url.Content("~/Resources/css/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Resources/font-awesome/css/font-awesome.min.css")" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom CSS-->
+    <link href="@Url.Content("~/Resources/css/general.css")" rel="stylesheet">
+
+    <!-- Owl-Carousel -->
+    <link href="@Url.Content("~/Resources/css/custom.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Resources/css/owl.carousel.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Resources/css/owl.theme.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Resources/css/style.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Resources/css/animate.css")" rel="stylesheet">
+
+    <!-- Magnific Popup core CSS file -->
+    <link rel="stylesheet" href="@Url.Content("~/Resources/css/magnific-popup.css")">
+
+    <script src="@Url.Content("~/Resources/js/modernizr-2.8.3.min.js")"></script>  <!-- Modernizr /-->
+
+    <style>
+        .back-to-top {
+            background: none;
+            /*margin: 0;*/
+            position: fixed;
+            bottom: 20px;
+            right: 0;
+            width: 70px;
+            height: 50px;
+            z-index: 100;
+            display: none;
+            /*text-decoration: none;*/
+            color: crimson;
+            //background-color: #ff9000;
+        }
+
+            .back-to-top i {
+                font-size: 40px;
+            }
+    </style>
+
+</head>
+
+<body id="home">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status"></div>
+    </div>
+
+    @RenderBody()
+
+    <!-- Top Control -->
+    <a href="#home" class="back-to-top" style="display:inline;">
+        <img src="@Url.Content("~/Resources/img/up.png")" />
+    </a>
+
+    <!-- JavaScript -->
+    <script src="@Url.Content("~/Resources/js/jquery-1.10.2.js")"></script>
+
+    <script src="@Url.Content("~/Resources/js/bootstrap.js")"></script>
+    <script src="@Url.Content("~/Resources/js/owl.carousel.js")"></script>
+    <script src="@Url.Content("~/Resources/js/script.js")"></script>
+    <!-- StikyMenu -->
+    <script src="@Url.Content("~/Resources/js/stickUp.min.js")"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="@Url.Content("~/Resources/js/stickUp.min.js")"></script>
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $(document).ready(function () {
+                $('.navbar-default').stickUp();
+            });
+        });
+
+    </script>
+    <!-- Smoothscroll -->
+    <script type="text/javascript" src="@Url.Content("~/Resources/js/jquery.corner.js")"></script>
+    <script src="@Url.Content("~/Resources/js/wow.min.js")"></script>
+    <script>
+        new WOW().init();
+    </script>
+    <script src="@Url.Content("~/Resources/js/classie.js")"></script>
+    <script src="@Url.Content("~/Resources/js/uiMorphingButton_inflow.js")"></script>
+    <!-- Magnific Popup core JS file -->
+    <script src="@Url.Content("~/Resources/js/jquery.magnific-popup.js")"></script>
+
+
+    <script>
+        jQuery(document).ready(function () {
+            var offset = 250;
+            var duration = 300;
+            jQuery(window).scroll(function () {
+                if (jQuery(this).scrollTop() > offset) {
+                    jQuery('.back-to-top').fadeIn(duration);
+                }
+                else {
+                    jQuery('.back-to-top').fadeOut(duration);
+                }
+            });
+            jQuery('.back-to-top').click(function (event) {
+                event.preventDefault();
+                jQuery('html, body').animate({ scrollTop: 0 }, duration);
+                return false;
+            })
+        });
+    </script>
+
+</body>
+
+</html>

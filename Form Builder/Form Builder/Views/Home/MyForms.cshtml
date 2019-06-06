@@ -1,0 +1,404 @@
+﻿@using WebApplication1.Models
+@model List<FormModel>
+@*@{
+        ViewBag.Title = "Index";
+        Layout = null;
+        var fields = (List <FormFieldModel>) ViewBag.FormField;
+    }*@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>My Forms</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        .nav-tabs {
+            margin-bottom: 15px;
+        }
+
+        .sign-with {
+            margin-top: 25px;
+            padding: 20px;
+        }
+
+        div#OR {
+            height: 30px;
+            width: 30px;
+            border: 1px solid #C2C2C2;
+            border-radius: 50%;
+            font-weight: bold;
+            line-height: 28px;
+            text-align: center;
+            font-size: 12px;
+            float: right;
+            position: absolute;
+            right: -16px;
+            top: 40%;
+            z-index: 1;
+            background: #DFDFDF;
+        }
+
+        .navbar-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+            margin-top: 20px;
+        }
+
+
+            .navbar-wrapper .container {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .navbar-wrapper .navbar {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+        .navbar-content {
+            width: 320px;
+            padding: 15px;
+            padding-bottom: 0px;
+            background-color: #ecf0f1;
+        }
+
+            .navbar-content:before, .navbar-content:after {
+                display: table;
+                content: "";
+                line-height: 0;
+            }
+
+        .navbar-nav.navbar-right:last-child {
+            margin-right: 15px !important;
+        }
+
+        .navbar-footer {
+            background-color: #ecf0f1;
+        }
+
+        .navbar-footer-content {
+            padding: 15px 15px 15px 15px;
+        }
+
+        .dropdown-menu {
+            padding: 0px;
+            overflow: hidden;
+        }
+
+        .button {
+            background-color: #5dade2;
+            border: none;
+            color: whitesmoke;
+            padding: 6px 25px;
+            text-align: left;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+            .button:hover {
+                background-color: #99cc00;
+                color: whitesmoke;
+            }
+
+        .button4 {
+            border-radius: 100px;
+        }
+
+        .thumbnail {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .caption {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #34495e;
+            width: 100%;
+            height: 100%;
+            padding: 2%;
+            display: none;
+            text-align: left;
+            color: #fff !important;
+        }
+
+        .btn {
+            background-color: #1abc9c;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+            .btn:hover {
+                background-color: #337ab7;
+                color: white;
+            }
+
+        .btn-default {
+            background-color: #337ab7;
+        }
+
+        .glyphicon, .fa {
+            color: #f8f8f8;
+        }
+
+        div.background-present {
+            background: url(../../Resources/img/intro/google_forms1600.png);
+            width: 350px;
+            height: 250px;
+        }
+
+        div.background-absent {
+            background: url(../../Resources/img/intro/google_slides1600.png);
+            width: 350px;
+            height: 250px;
+        }
+
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 22px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button2 {
+            background-color: white;
+            color: black;
+        }
+
+            .button2:hover {
+                background-color: #337ab7;
+                color: white;
+            }
+
+        .Sharebutton {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 22px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .Sharebutton2 {
+            background-color: #1abc9c;
+            color: white;
+        }
+
+            .Sharebutton2:hover {
+                background-color: #337ab7;
+                color: white;
+            }
+    </style>
+
+    <script>
+
+        $(document).ready(function () {
+            $("[rel='tooltip']").tooltip();
+            $('.thumbnail').hover(
+                function () {
+                    $(this).find('.caption').slideDown(250); //.fadeIn(250)
+                },
+                function () {
+                    $(this).find('.caption').slideUp(250); //.fadeOut(205)
+                }
+            );
+        });
+        
+      
+
+        function Submitform() {
+            debugger;
+            $.ajax({
+                url: $("#dynamicForm").attr("action"),
+                type: 'POST',
+                data: $("#dynamicForm").serialize(),
+                success: function (obj) {
+                    if (obj.IsSuccess) {
+
+                        alert(obj.Message);
+                    }
+                    else {
+                        alert(obj.Message);
+                    }
+                },
+                error: function (xhr, desc, err) {
+                    alert("error");
+                }
+            });
+        }
+
+
+
+        $(document).ready(function () {
+            $("#link").click(function () {
+                $("#link").text("Copied!");
+            });
+        });
+
+        function copy() {
+            try {
+                $('#txt').select();
+                document.execCommand('copy');
+            }
+            catch (e) {
+                alert(e);
+            }
+        }
+
+        $(document).ready(function () {
+            $("#btn-Share").click(function () {
+                $("#myModal").modal('hide');
+            });
+        });
+
+    </script>
+
+
+</head>
+
+<body style="background-color:#f3f3f3">
+    @Html.Partial("BuilderNavbar")
+
+    @if (Session["UserEmail"] != null)
+    {
+       
+            <div class="container" style="padding-top:75px;">
+                <div class="row">
+                    @if (Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                            <div class="col-md-4">
+                                <br /><br />
+                                <div class="thumbnail">
+                                    <div class="caption">
+                                        <center>
+                                            <br />
+                                            <div style="height:40px;overflow-y:hidden;overflow-x:hidden">
+                                                @if (item.FormDescription != null)
+                                                {
+                                                    <h5>@item.FormDescription</h5>
+                                                }
+                                                else
+                                                {
+                                                    <h5><span style="color:whitesmoke">Form Description is not available</span> </h5>
+                                                }
+                                            </div>
+                                            @if (item.FormUrl != null)
+                                            {
+                                                <div style="height:40px;">
+                                                    <br /><br />
+                                                    <a href="@item.FormUrl" onclick="onpreview()" class="button button2">Preview </a>
+                                                    <a href="#" class="Sharebutton Sharebutton2" data-id="#@item.HashUrl" data-toggle="modal" data-target="#@item.HashUrl"><i class="fa fa-share-alt" aria-hidden="true"></i> Share</a><br /><br />
+                                                
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <h5 style="color:#1abc9c">Once URL is generated form can't be edited further!!</h5>
+                                                <a href="@Url.Action("GenerateUrl","Home",new { @id=item.FormId })" class="button button2">Get Url</a>
+                                            }
+                                            @if (item.FormUrl == null)
+                                            {
+                                                <div style="height:40px">
+                                                    <h4>Added Fields:@item.FieldCount</h4>
+                                                </div>
+                                            }
+
+                                            <div style="height:30px">
+                                                @if (item.FormUrl == null)
+                                                {
+                                                    <a href="@Url.Action("Fields","Home", new {@formId = item.FormId })" class="btn" style="vertical-align:middle;font-size:16px"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                    <a href="#" class="btn " style="vertical-align:middle;font-size:16px;background-color:red" data-toggle="modal" data-target="#deletemodal"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                }
+                                            </div>
+                                        </center>
+                                    </div>
+
+                                    @if (item.FormName != null)
+                                    {
+                                        <div class="background-present">
+                                            <div class="transbox">
+                                                <p style="padding-top :70px">
+                                                    <Center>
+                                                        <h3 style="color:#3caa1c">@item.FormName</h3>
+                                                    </Center>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="background-absent">
+                                            <div class="transbox">
+                                                <p style="padding-top :70px">
+                                                    <Center>
+                                                        <h3 style="color:#1abc9c">Name Not Available</h3>
+                                                    </Center>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
+                                    @*<img src="http://www.photoshophelps.com/wp-content/uploads/2015/04/final-registration-form.png" alt="..." style="width:350px;height:250px">*@
+                                </div>
+                            </div>
+                            @Html.Partial("_deleteform", item)
+                            @Html.Partial("_share", item)
+                            @Html.Partial("SnackBar")
+                        }
+                    }
+                </div><!--/row -->
+            </div>
+        <!-- end container -->
+    }
+    else
+    {
+        <div class="modal fade" id="bsModal3" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="color: #34495e; margin-top: 200px;">
+                    <center>
+                        <div class="modal-body">
+                            <h4 style="color:red">Login Required</h4>
+                            <h6>Click OK to login</h6>
+                        </div>
+                        <div class="form-group">
+                            <a href="@Url.Action("Login","Home")" type="button" class="btn btn-success" style="background-color:#337ab7">OK</a>
+                            <a href="@Url.Action("Index","Home")" type="button" class="btn" style="background-color:#1abc9c;color:white">Cancel</a>
+
+                        </div>
+                    </center>
+                    <br />
+                </div>
+            </div>
+        </div>
+        <script>
+            $("#bsModal3").modal('show');
+        </script>
+    }
+</body>
+
+</html>

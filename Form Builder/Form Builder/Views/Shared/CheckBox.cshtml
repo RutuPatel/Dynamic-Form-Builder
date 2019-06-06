@@ -1,0 +1,68 @@
+﻿@using WebApplication1.Models
+@model FormFieldModel
+@if (!Model.IsRunMode)
+{
+    <div id="CheckBoxDiv" class="container col-md-12" style="background-color:#f7f6d4;height:110px">
+        <div class="col-md-10">
+            <div class="container col-md-5" style="padding-top: 10px; padding-bottom: 10px; height: 25px;">
+                <form id="CB">
+                    <div class="form-group">
+                        <br />
+                        <label style="height: 7px;">
+                            Check all that apply
+                        </label>
+                        <br /><br />
+                        <label class="checkbox-inline" style="font-weight:100!important;height:27px">
+                            <input type="checkbox" value="option1" disabled="disabled"><br /><br />First Choice
+                        </label>
+                        <br />
+                        <label class="checkbox-inline" style="font-weight:100!important;height:27px ">
+                            <input type="checkbox" value="option2" disabled="disabled"><br /><br />Second Choice
+                        </label>
+
+                        <br />
+                    </div>
+                </form>
+            </div>
+        </div>
+        @Html.Partial("_ButtonPanel", Model)
+    </div>
+
+}
+else
+{
+    <div class="form-row">
+        @Html.HiddenFor(m=>m.Hobby)
+        <label>
+            <span style="font-size:20px">Checkbox all that apply</span>
+        </label>
+        <br />
+        <div class="checkbox-inline">
+            <label>                
+                <input type="checkbox" name="vehicle" value="Cricket" class="chkHobby"> Cricket
+            </label>
+        </div>
+        <div class="checkbox-inline">
+            <label>
+                <input type="checkbox" name="vehicle" value="Football"class="chkHobby"> Football
+            </label>
+        </div>
+        <div class="checkbox-inline">
+            <label>
+                <input type="checkbox" name="vehicle" value="Music" class="chkHobby"> Music
+            </label>
+        </div>
+    </div>
+    @*<script>
+        function OnCheck()
+        { 
+            var sList = "";
+            $('.chkHobby:checked').each(function () {
+                sList += $(this).val() + ",";
+                $('#Hobby').val(sList);
+            });
+            return false;
+        } 
+        
+    </script>*@
+}

@@ -1,0 +1,297 @@
+﻿@using WebApplication1.Models
+@model FormModel
+@{
+    ViewBag.Title = "Home Page";
+    bool Isform = Convert.ToBoolean(ViewBag.IsForm);
+}
+<script>
+    function OnSave() {
+        debugger;
+        var flag = true;
+        if ($(".FirstName").val() == "") {
+            flag = false;
+            $(".FirstName").css("border-color", "red");
+            $(".FirstReqTxt").text("First Name Required")
+        }
+        else {
+            $(".FirstName").css("border-color", "");
+            $(".FirstReqTxt").text("")
+        }
+
+
+        if ($(".lastNametxt").val() == "") {
+            flag = false;
+            $(".lastNametxt").css("border-color", "red");
+            $(".lastReqTxt").text("Last Name Required")
+        }
+        else {
+            $(".lastNametxt").css("border-color", "");
+            $(".lastReqTxt").text("")
+        }
+
+
+
+        if ($(".addresstxt").val() == "") {
+            flag = false;
+            $(".addresstxt").css("border-color", "red");
+            $(".add1ReqTxt").text("Street Address Required")
+        }
+        else {
+            $(".addresstxt").css("border-color", "");
+            $(".add1ReqTxt").text("")
+        }
+
+
+
+        if ($(".address2txt").val() == "") {
+            flag = false;
+            $(".address2txt").css("border-color", "red");
+            $(".add2ReqTxt").text("Address Line 2 Required")
+        }
+        else {
+            $(".address2txt").css("border-color", "");
+            $(".add2ReqTxt").text("")
+        }
+
+
+
+        if ($(".citytxt").val() == "") {
+            flag = false;
+            $(".citytxt").css("border-color", "red");
+            $(".CityReqTxt").text("Please Enter City Name")
+        }
+        else {
+            $(".citytxt").css("border-color", "");
+            $(".CityReqTxt").text("")
+        }
+
+
+
+        if ($(".pincodetxt").val() == "") {
+            flag = false;
+            $(".pincodetxt").css("border-color", "red");
+            $(".PincodeReqTxt").text("Postal code is required")
+        }
+        else {
+            $(".pincodetxt").css("border-color", "");
+            $(".PincodeReqTxt").text("")
+        }
+
+
+
+        if ($("#country").val() == "-1") {
+            flag = false;
+            $("#country").css("border-color", "red");
+            $(".CountryReqTxt").text("Please select Country")
+        }
+        else {
+            $("#country").css("border-color", "");
+            $(".CountryReqTxt").text("")
+        }
+
+
+
+        if ($("#state").val() == "") {
+            flag = false;
+            $("#state").css("border-color", "red");
+            $(".StateReqTxt").text("Please Select State")
+
+        }
+        else {
+            $("#state").css("border-color", "");
+            $(".StateReqTxt").text("")
+        }
+
+
+        if ($(".datapickertxt").val() == "") {
+            flag = false;
+            $(".datapickertxt").css("border-color", "red");
+            $(".DateReqTxt").text("Please Select Your DOB")
+
+        }
+        else {
+            $(".datapickertxt").css("border-color", "");
+            $(".DateReqTxt").text("")
+        }
+
+        if ($(".timepickertxt").val() == "") {
+            flag = false;
+            $(".timepickertxt").css("border-color", "red");
+            $(".TimeReqTxt").text("This Field is required")
+        }
+        else {
+            $(".timepickertxt").css("border-color", "");
+            $(".TimeReqTxt").text("")
+        }
+
+        if ($(".EmailTxt").val() == "") {
+            flag = false;
+            $(".EmailTxt").css("border-color", "red");
+            $(".emailReqTxt").text("Email is required")
+        }
+        else {
+            $(".EmailTxt").css("border-color", "");
+            $(".emailReqTxt").text("")
+        }
+
+
+        if ($(".ContactTxt").val() == "") {
+            flag = false;
+            $(".ContactTxt").css("border-color", "red");
+            $(".contactReqTxt").text("Please Provide 10-digit Mobile Number")
+        }
+        else {
+            $(".ContactTxt").css("border-color", "");
+            $(".contactReqTxt").text("")
+        }
+
+        if ($(".textAreaTxt").val() == "") {
+            flag = false;
+            $(".textAreaTxt").css("border-color", "red");
+            $(".textareaReqTxt").text("Give Us some Information")
+        }
+        else {
+            $(".textAreaTxt").css("border-color", "");
+            $(".textareaReqTxt").text("")
+        }
+
+
+        if ($(".FileUploadtxt").val() == "") {
+            flag = false;
+            $(".FileUploadtxt").css("border-color", "red");
+            $(".FileReqTxt").text("Please upload Image")
+        }
+        else {
+            $(".FileUploadtxt").css("border-color", "");
+            $(".FileReqTxt").text("")
+        }
+
+        if ($(".textboxtxt").val() == "") {
+            flag = false;
+            $(".textboxtxt").css("border-color", "red");
+            $(".textReqTxt").text("Required")
+        }
+        else {
+            $(".textboxtxt").css("border-color", "");
+            $(".textReqTxt").text("")
+        }
+
+        if ($(".dropdownTxt").val() == "") {
+            flag = false;
+            $(".dropdownTxt").css("border-color", "red");
+            $(".dropdownReqTxt").text("Please select one option")
+        }
+        else {
+            $(".dropdownTxt").css("border-color", "");
+            $(".dropdownReqTxt").text("")
+        }
+
+
+        if (flag) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+</script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+
+<style>
+    #Submit {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+    }
+
+        #Submit:hover {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+</style>
+@if (Isform)
+{
+    if (Model != null)
+    {
+        using (Html.BeginForm("GetResponse", "Home", FormMethod.Post, new { @class = "form-labels-on-top", @style = "border-radius: 15px;margin-top: 40px;margin-bottom: 40px;box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 8px 24px 0 rgba(0, 0, 0, 0.24); border-style: solid;border - width: 10px;border-color:#4CAF50;" }))
+        {
+            <html>
+            <body style="background-color:#f3f3f3">
+                <link href="~/Resources/css/new/demo.css" rel="stylesheet" />
+                <link href="~/Resources/css/new/form-labels-on-top.css" rel="stylesheet" />
+                <div class="main-content" id="response">
+                    <div class="form-title-row">
+                        @Html.HiddenFor(model => model.FormName, new { @class = "form-control" })
+                        @Html.HiddenFor(model => model.FormId, new { @class = "form-control" })
+                        @Html.HiddenFor(model => model.Sharetoemail, new { @class = "form-control" })
+                        <h1>@Html.DisplayFor(Model => Model.FormDescription)</h1>
+                    </div>
+                    <div class="form-row">
+                        @if (Model.formField.Count > 0)
+                        {
+                            foreach (var item in Model.formField.OrderBy(x => x.SortIndex))
+                            {
+                                Html.RenderPartial("FormField", item);
+                            }
+                        }
+                    </div>
+                    <div class="form-row">
+                        <button id="Submit" type="submit" onclick="return OnSave()">Submit Form</button>
+                    </div>
+                </div>
+            </body>
+        </html>
+        }
+    }
+    else
+    {
+        @Html.Partial("Thanks")
+    }
+}
+else
+{
+    @Html.HiddenFor(m => m.UserId);
+                    <!-- Intro Header -->
+    @Html.Partial("_Introheader")
+
+                    <!-- NavBar-->
+    @Html.Partial("_Navbar")
+                    <!-- How to Use -->
+    @Html.Partial("_Howitwork")
+
+                    <!--Features-->
+    @Html.Partial("_Features")
+
+                    <!-- Morefeatures-->
+    @Html.Partial("_Morefeatures")
+
+                    <!-- Screenshot -->
+    @*@Html.Partial("_Screenshot")*@
+
+                    <!-- Try Now -->
+    @Html.Partial("_Trynow")
+
+                    <!-- Contact -->
+    @Html.Partial("_Contact")
+
+                    <!-- Footer -->
+    @Html.Partial("_Visitus")
+
+
+}
+<!-- Credits -->
+@*@Html.Partial("_Credits")*@
+
+<!-- Banner Download -->
+@*@Html.Partial("_Download")*@
+

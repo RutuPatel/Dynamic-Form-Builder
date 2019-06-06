@@ -1,0 +1,24 @@
+﻿@using WebApplication1.Models
+@model FormModel
+@using (Html.BeginForm("MyForms", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="modal fade" id="deletemodal" role="dialog" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
+
+            <!-- Modal content-->
+            <div class="modal-content" style="margin-top: 200px;">
+                <div class="modal-header">                   
+                    
+                    <center>
+                        Do you really want to delete this form?
+                        <br /><br />
+                        <a href="@Url.Action("DeleteForm", "Home", new { @FormId = Model.FormId })" class="btn btn-primary">Yes</a>&nbsp;
+                        <a href="#" data-dismiss="modal" type="button" id="btn-no" class="btn" style="background-color:#1abc9c;color:white">No</a>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+}

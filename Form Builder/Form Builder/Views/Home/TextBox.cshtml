@@ -1,0 +1,56 @@
+﻿@using WebApplication1.Models
+@model FormFieldModel
+
+
+@if (!Model.IsRunMode)
+{
+    <div id="TextBoxDiv" class="container col-md-12" style="background-color:#f7f6d4;height:80px;padding-top:15px;">
+        <div class="col-md-10">
+            <div class="container col-md-5">
+                <form id="TB">
+                    <div class="form-group">
+                        <br />
+                        <label>Untitled</label>
+                        <input id="OnRun" type="text" class="form-control" disabled="disabled">
+                    </div>
+                </form>
+            </div>
+        </div>
+        @Html.Partial("_ButtonPanel", Model)
+    </div>
+}
+else
+{
+    <div class="form-row">
+        <label><span style="font-size:20px">Full name</span></label>
+        <div class="form-radio-buttons">
+            <div>
+                <label>
+                    @Html.TextBoxFor(Model=>Model.FieldResponse,new { @class="form-control"})
+                    @*<input class="form-control" type="text" name="name" placeholder="Enter Entire Name">*@
+                </label>
+            </div>            
+        </div>
+    </div>
+   
+
+    @*<div id="TextBoxDiv" class="container col-md-12" style="background-color:#f7f6d4;">
+        <div class="col-md-10">
+            <div class="container col-md-7">
+                <form id="TB">
+                    <div class="form-group">                       
+                        <label style="color:#1abc9c;font-size:16px">Untitled</label>
+                        <input id="OnRun" type="text" class="form-control">
+                    </div>
+                </form>
+            </div>
+        </div>
+        @Html.Partial("_ButtonPanel", Model)
+    </div>*@
+}
+
+
+
+
+
+

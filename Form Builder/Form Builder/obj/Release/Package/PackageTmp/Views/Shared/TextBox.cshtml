@@ -1,0 +1,43 @@
+﻿@using WebApplication1.Models
+@model FormFieldModel
+    
+
+@if (!Model.IsRunMode)
+{
+    <div id="TextBoxDiv" class="container col-md-12" style="background-color:#f7f6d4;height:80px;padding-top:15px;">
+        <div class="col-md-10">
+            <div class="container col-md-5">
+                <form id="TB">
+                    <div class="form-group">
+                        <br />
+                        <label>Untitled</label>
+                        <input id="OnRun" type="text" class="form-control" disabled="disabled">
+                    </div>
+                </form>
+            </div>
+        </div>
+        @Html.Partial("_ButtonPanel", Model)
+    </div>
+}
+else
+{
+    <div class="form-row">
+        <label style="font-size:20px"><span>Full Name</span></label>
+        <div class="form-radio-buttons">
+            <div>
+                <label>
+                    @Html.TextBoxFor(model => model.FieldResponse, new { @onblur = "validateName(this)", placeholder = "Enter Your Full Name", type = "text", @class = "form-control textboxtxt" })
+                    <div class="textReqTxt" style="color:red;font-size:12px"></div>
+                    @*<input id="OnRun" type="time" class="form-control" placeholder="HH:MM:SS">*@
+                </label>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+
+
+

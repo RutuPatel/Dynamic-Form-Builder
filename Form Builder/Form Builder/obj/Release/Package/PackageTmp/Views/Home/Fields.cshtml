@@ -1,0 +1,294 @@
+﻿@*@model WebApplication1.Models.FormFieldModel*@
+@using WebApplication1.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+    var fields = (List<FormFieldModel>)ViewBag.FormField;
+}
+@model FormModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Form Builder</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    @*<link href="~/Resources/css/bootstrap.min.css" rel="stylesheet" />
+
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+
+
+
+        <link href="~/Resources/css/general.css" rel="stylesheet" />
+
+        <link href="~/Resources/css/custom.css" rel="stylesheet">
+        <link href="~/Resources/css/owl.carousel.css" rel="stylesheet">
+        <link href="~/Resources/css/owl.theme.css" rel="stylesheet">
+        <link href="~/Resources/css/style.css" rel="stylesheet">
+        <link href="~/Resources/css/animate.css" rel="stylesheet">
+
+
+        <link rel="stylesheet" href="~/Resources/css/magnific-popup.css">
+
+        <script src="~/Resources/js/modernizr-2.8.3.min.js"></script>*@  <!-- Modernizr /-->
+    <style>
+        .navbar-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+            margin-top: 20px;
+        }
+
+            /* Flip around the padding for proper display in narrow viewports */
+            .navbar-wrapper .container {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .navbar-wrapper .navbar {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+        .navbar-content {
+            width: 320px;
+            padding: 15px;
+            padding-bottom: 0px;
+            background-color: #ecf0f1;
+        }
+
+            .navbar-content:before, .navbar-content:after {
+                display: table;
+                content: "";
+                line-height: 0;
+            }
+
+        .navbar-nav.navbar-right:last-child {
+            margin-right: 15px !important;
+        }
+
+        .navbar-footer {
+            background-color: #ecf0f1;
+        }
+
+        .navbar-footer-content {
+            padding: 15px 15px 15px 15px;
+        }
+
+        .dropdown-menu {
+            padding: 0px;
+            overflow: hidden;
+        }
+    </style>
+    <style>
+        .button {
+            background-color: #0099CC; /* Green */
+            border: none;
+            color: whitesmoke;
+            padding: 6px 25px;
+            text-align: left;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+            .button:hover {
+                background-color: #99cc00;
+                color: whitesmoke; /* Green */
+            }
+
+        .button4 {
+            border-radius: 100px;
+        }
+    </style>
+
+    <script>
+       
+        function Submitform() {
+            $.ajax({
+                url: $("#dynamicForm").attr("action"),
+                type: 'POST',
+                data: $("#dynamicForm").serialize(),
+                success: function (obj) {
+                    if (obj.IsSuccess) {
+                        debugger;
+                        $("#bsModal3 .modal-body").html(obj.Message);
+                        myfunction();
+                    }
+                    else {
+                        alert(obj.Message);
+                    }
+                },
+                error: function (xhr, desc, err) {
+                    alert("error");
+                }
+            });
+        }
+       
+       
+
+        $(document).ready(function () {
+            $("#ClearBtn").click(function () {
+                $("#result").empty();
+            });
+           
+            $("#SaveBtn").click(function (event) {
+                event.preventDefault();
+            });
+        });
+    </script>
+    @*<script>
+            function GetContent(url)
+            {
+                $.get(url, function (data) {
+                    debugger;
+                    $("#result").append(data);
+                    $("a.delete").live("click", function () {
+                        $(this).parents("div.editorRow:first").remove();
+                        return false;
+                    });
+
+                    //$(".delete").click(function(){
+                    //    $(this).parent().parent().remove();
+                    //});
+                });
+            }
+        </script>*@
+
+    <script>
+
+            function drop(ev) {
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("text/html");
+                var element = document.getElementById(data);
+                $.ajax({
+                    url: element.href,
+                    cache: false,
+                    success: function (html) {
+                        $("#result").append(html);
+                        $("a.delete").on("click", function () {
+                            $(this).parents("div.editorRow").remove();
+                            return false;
+                        });
+
+                    }
+                });
+                return false;
+            }
+
+
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+
+        }
+        function drag(ev) {
+            ev.dataTransfer.setData("text/html", ev.target.id);
+        }
+        function myfunction() {
+            $("#bsModal3").modal('show');
+            $("#result").empty();          
+        }
+
+        function GetContent(url) {
+            $.get(url, function (data) {
+                debugger;
+                $("#result").append(data);
+            });
+        }
+    </script>
+</head>
+
+<body>
+    @Html.Partial("BuilderNavbar")
+    <div class="container col-md-12" style="background-color:#FFFFFF;padding-left: 0px;padding-right: 0px;padding-top:50px;">
+        <div class="col-md-3" style="padding-left: 5px; height:590px;padding-right:5px;position:fixed">
+            <div class="container col-md-12" style="padding-left: 6px;padding-right:0px;">
+                <ul class="nav nav-pills">
+                    <br />
+                    <li class="active"><a data-toggle="pill" href="#home" style="width:100px;font-size:14px;line-height:1">Add Field</a></li>
+                    <li><a data-toggle="pill" href="#menu1" style="width:100px;font-size:14px;line-height:1">Edit Field</a></li>
+                    <li><a data-toggle="pill" href="#menu2" style="width:100px;font-size:14px;line-height:1">Form Field</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+
+                        @foreach (var item in fields.OrderBy(x => x.SortIndex))
+                        {
+                            <div class="col-md-6" style="padding-left: 15px;padding-top: 10px;">
+
+                                <a id="@item.Id" type="@item.FieldType" class="btn button button4" onclick="GetContent('@Url.Action("GetField", "Home",new {type= item.FieldType, fieldId = item.Id    })'); return false;" href="@Url.Action("GetField", "Home",new {type= item.FieldType, fieldId = item.Id })" draggable="true" ondragstart="drag(event)" style="vertical-align:middle;width:123px;padding-left: 10px;font-size:12px">
+                                    <span class="@item.Icons network-name"></span>&nbsp;<span class="text-center"> @item.FieldName</span>
+                                </a>
+                                <br />
+                            </div>
+                        }
+                        <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                            <br />
+                            <a id="ClearBtn" class="btn button button4" style="background-color:#d9534f ;width:140px"><i class="fa fa-times"></i>&nbsp;Reset</a>
+                        </div>
+                        <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                            <br />
+                           
+                                <a id="SaveBtn1" onclick="Submitform()" data-toggle="modal" data-target="#bsModal3" class="btn button button4 buttonsubmit" style="background-color:forestgreen ; padding-right: 15px!important"><i class="fa fa-check"></i>&nbsp;Save Form</a>
+                           
+                        </div>
+                    </div>
+
+
+                    <div id="menu1" class="tab-pane fade" style="padding-left: 0px;padding-top: 10px;"></div>
+                    <div id="menu2" class="tab-pane fade" style="padding-left: 0px;padding-top: 10px;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.Partial("Form", Model)
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="bsModal3" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" style="color: #34495e; margin-top: 200px;">
+                <center>
+                    <div class="modal-body">
+                        Your @Model.FormName is Saved Successfully
+                    </div>
+                    <a type="button" href="@Url.Action("Fields","Home")" class="btn btn-success bt-md">OK</a><br />
+                </center>
+                <br />
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="loginrequired" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" style="color: #34495e; margin-top: 200px;">
+                <center>
+                    <div class="modal-body">
+                        <h4 style="color:red">Login required!!!</h4>
+                        <h6>Click OK to login</h6>
+                    </div>
+                    <div class="form-group">
+                        <a href="@Url.Action("Login","Home")" type="button" class="btn btn-success bt-md" style="background-color:#34495e">OK</a>
+                        <button type="button" class="btn" data-dismiss="modal" style="background-color:#48c9b0">cancel</button>
+                    </div>
+                </center>
+                <br />
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+﻿@using WebApplication1.Models
+@model FormFieldModel
+
+@if (!Model.IsRunMode)
+{
+    <div id="RadioButtonDiv" class="container col-md-12" style="background-color:#f7f6d4;height:120px">
+        <div class="col-md-10">
+            <div class="container col-md-5" style="padding-top: 10px; padding-bottom: 10px; height: 25px;">
+                <form id="RB">
+                    <br />
+                    <label style="height: 7px;">Select a Choice</label>
+                    <br /><br /><br />
+                    <div class="radio" style="margin-bottom: -1px; margin-top: -1px; height: 25px">
+                        <label><input type="radio" name="optradio" disabled="disabled" style="font-weight:100!important;"><br />Option 1</label>
+                    </div>
+                    <div class="radio" style="margin-bottom: -1px; margin-top: -1px; height: 25px">
+                        <label><input type="radio" name="optradio" disabled="disabled" style="font-weight:100!important;"><br />Option 2</label>
+                    </div>
+                    <div class="radio" style="margin-bottom: -1px; margin-top: -1px; height: 25px">
+                        <label><input type="radio" name="optradio" disabled="disabled" style="font-weight:100!important;"><br />Option 3</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+        @Html.Partial("_ButtonPanel", Model)
+    </div>
+}
+else
+{
+    <div class="form-row">
+        <label ><span style="font-size:20px">Select a Choice</span></label>
+        <div class="form-radio-buttons">
+            <div>
+                <label style="padding-left: 25px;">
+                    @Html.RadioButtonFor(model => model.FieldResponse, "Male") Male
+                </label>
+            </div>   
+            <div>
+                <label style="padding-left: 25px;">
+                    @Html.RadioButtonFor(model => model.FieldResponse, "Female") Female
+                </label>
+            </div>      
+        </div>
+    </div>
+
+    @*<div id="RadioButtonDiv" class="container col-md-12" style="background-color:#f7f6d4;">
+        <div class="col-md-10">
+            <div class="container col-md-7">
+                <form>
+                    <label style="color:#1abc9c;font-size:16px">Select a Choice</label> <br />
+                    <label style="padding-left: 20px;"><input type="radio" name="optradio">&nbsp;Option 1</label><br />
+                    <label style="padding-left: 20px;"><input type="radio" name="optradio">&nbsp;Option 2</label><br />
+                    <label style="padding-left: 20px;"><input type="radio" name="optradio">&nbsp;Option 3</label>
+                </form>
+            </div>
+        </div>
+    </div>*@
+}

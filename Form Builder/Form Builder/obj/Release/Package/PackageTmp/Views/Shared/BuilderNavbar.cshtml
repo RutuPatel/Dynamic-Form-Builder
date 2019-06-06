@@ -1,0 +1,89 @@
+﻿
+
+<style>
+    /* Special class on .container surrounding .navbar, used for positioning it into place. */
+    .navbar-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 20;
+        margin-top: 20px;
+    }
+
+        /* Flip around the padding for proper display in narrow viewports */
+        .navbar-wrapper .container {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .navbar-wrapper .navbar {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+    .navbar-content {
+        width: 320px;
+        padding: 15px;
+        padding-bottom: 0px;
+        background-color: #ecf0f1;
+    }
+
+        .navbar-content:before, .navbar-content:after {
+            display: table;
+            content: "";
+            line-height: 0;
+        }
+
+    .navbar-nav.navbar-right:last-child {
+        margin-right: 15px !important;
+    }
+
+    .navbar-footer {
+        background-color: #ecf0f1;
+    }
+
+    .navbar-footer-content {
+        padding: 15px 15px 15px 15px;
+    }
+
+    .dropdown-menu {
+        padding: 0px;
+        overflow: hidden;
+    }
+</style>
+<nav class="nav navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid col-md-12" style="padding-left: 0px;padding-right: 0px;">
+        <div class="container col-md-12 " style="background-color:#34495e">
+
+            <a href="@Url.Action("Index","Home")">
+                <img src="~/Resources/img/Logo/form_builder_logo.png" style="height:55px" />
+            </a>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    @if (Session["UserEmail"] != null)
+                    {
+                        <a href="#" style="color:whitesmoke;font-size:18px;">
+                            Welcome @Session["UserName"].ToString()
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Login","Home")" style="color:whitesmoke;font-size:18px">Login</a>
+                    }
+                </li>
+                <li><a href="@Url.Action("Index","Home")" onclick="" style="color:whitesmoke;font-size:18px">Home</a></li>
+                <li><a href="@Url.Action("Fields","Home")" style="color:whitesmoke;font-size:18px">Builder</a></li>
+                <li><a href="@Url.Action("MyForms","Home")" style="color:whitesmoke;font-size:18px">Forms</a></li>
+                <li><a href="@Url.Action("Response","Home")" style="color:whitesmoke;font-size:18px">Response</a></li>
+                <li>
+                    @if (Session["UserEmail"] != null)
+                    {
+                        <a href="@Url.Action("LogOut", "Home")" style="color:whitesmoke;font-size:18px">Sign Out</a>
+                    }
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>

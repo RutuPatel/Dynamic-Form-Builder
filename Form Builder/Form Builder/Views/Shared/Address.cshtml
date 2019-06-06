@@ -1,0 +1,102 @@
+﻿@using WebApplication1.Models
+@model FormFieldModel
+<script>
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+</script>
+
+@if (!Model.IsRunMode)
+{
+    <div id="AddressBoxDiv" class="container col-md-12" style="background-color:#f7f6d4;height:250px">
+        <div class="container col-md-10" style="padding-top: 10px; padding-bottom: 15px; height: 25px;">
+            <form id="AB">
+                <div class="form-group">
+                    <br />
+                    <label style="height: 7px;padding-left: 16px;">Address</label><br />
+                    <div class="col-md-12" style="height:50px;margin-top:4px"><label style="font-weight:100!important;height: 7px">Street Address</label><br /><input type="text" class="form-control" disabled="disabled"></div><br /><br />
+
+                    <div class="col-md-12" style="height:50px;margin-top:4px"><label style="font-weight:100!important;height: 7px">Address Line 2</label><br /><input type="text" class="form-control" disabled="disabled"></div><br /><br />
+
+                    <div class="col-md-12" style="padding-left: 0px;padding-right: 0px;height:50px;margin-top:4px">
+                        <br /><br />
+                        <div class="col-md-6"><label style="font-weight:100!important;height: 7px">City</label><br /><input type="text" class="form-control" disabled="disabled"></div>
+                        <div class="col-md-6"><label style="font-weight:100!important;height: 7px">State</label><br /><input type="text" class="form-control" disabled="disabled"></div>
+                    </div><br /><br />
+
+                    <div class="col-md-12" style="padding-left: 0px;padding-right: 0px;height:50px;margin-top:4px">
+                        <br /><br />
+                        <div class="col-md-6"><label style="font-weight:100!important;height: 7px">Pin Code</label><br /><input type="text" class="form-control" disabled="disabled"></div>
+                        <div class="col-md-6">
+                            <label style="font-weight:100!important;height: 7px">Country</label><br />
+                            <select class="form-control" disabled>
+                                <option>--Select--</option>
+                                <option>Gujarat</option>
+                                <option>Kerala</option>
+                                <option>Delhi</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        @Html.Partial("_ButtonPanel", Model)
+    </div>
+}
+else
+{
+    <div class="form-row">
+        <label><span style="font-size:20px">Address</span></label><br /><br />
+        <div class="col-md-12" style="padding-left: 0px;">
+            
+            @Html.TextBoxFor(model => model.StreetAdress, new { @class = "form-control addresstxt", type = "text" ,placeholder= "Enter Street Address" })
+            <div class="add1ReqTxt" style="color:red;font-size:12px"></div><br />
+             @*<input type="text" class="form-control">*@
+        </div>
+        <div class="col-md-12" style="padding-left: 0px;">
+            
+            @Html.TextBoxFor(model => model.Adressline2, new { @class = "form-control address2txt", type = "text", placeholder = "Enter Address line 2" })
+            <div class="add2ReqTxt" style="color:red;font-size:12px"></div><br />
+             @*<input type="text" class="form-control">*@
+        </div>
+        <div class="col-md-12" style="padding-left: 0px;">
+            
+            @Html.TextBoxFor(model => model.City, new { @class = "form-control citytxt", type = "text", placeholder = "Enter City" })
+            <div class="CityReqTxt" style="color:red;font-size:12px"></div><br />
+             @*<input type="text" class="form-control">*@
+        </div>
+        <div class="col-md-12" style="padding-left: 0px;">
+            <div>
+               
+                @Html.TextBoxFor(model => model.PinCode, new { onkeypress = "return isNumber(event)", @class = "form-control pincodetxt", type = "text", placeholder = "Enter Postal Code" })
+                <div class="PincodeReqTxt" style="color:red;font-size:12px"></div><br />
+                 @*<input type="text" class="form-control">*@
+            </div>
+            <div class="col-md-12" style="padding-left: 0px;padding-right: 0px;">
+                <script src="~/Resources/js/countries.js"></script>
+                <div>
+                    <label>Country</label><br />
+                    <select class="form-control" id="country" name="country"></select>
+                    <div class="CountryReqTxt" style="color:red;font-size:12px"></div>
+                    <br /> 
+                    <label>State</label><br />
+                    <select class="form-control" name="state" id="state">
+                        <option value="">Select State</option>
+                    </select>
+                    <div class="StateReqTxt" style="color:red;font-size:12px"></div>
+                    <br />
+                    <script language="javascript">
+                        populateCountries("country", "state");
+                    </script>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}

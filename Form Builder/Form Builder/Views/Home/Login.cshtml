@@ -1,0 +1,98 @@
+﻿@model Form_Builder.Models.UserModel
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <link href="~/Resources/css/Account.css" rel="stylesheet" />
+
+    <style>
+        a:focus, a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+    </style>
+
+    <script>
+        function showPassword() {
+            var key_attr = $('#key').attr('type');
+            if (key_attr != 'text') {
+                $('.checkbox').addClass('show');
+                $('#key').attr('type', 'text');
+
+            }
+            else {
+                $('.checkbox').removeClass('show');
+                $('#key').attr('type', 'password');
+            }
+        }
+    </script>
+
+</head>
+
+<body style="background-image:url('../../Resources/img/intro/Win8BackGround-203040.png')">
+
+    <div class="col-md-12">
+        <section id="login">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            <div class="form-wrap">
+                                <span style="font-size:52px;color:#1abc9c"><center>SignIn</center></span>
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                               
+                                <br />
+                                <form role="form" action="javascript:;" method="post" id="login-form" autocomplete="off">
+                                    <div class="form-group" style="margin-left: 0px;margin-right:0px;">                                        
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", type = "email", name = "email", @id = "email", placeholder = "Email Address" })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @style = "color:#1abc9c" })  
+                                                                            
+                                    </div>
+                                    <div class="form-group" style="margin-left: 0px;margin-right:0px;">                                        
+                                        @Html.PasswordFor(model => model.Password, new { @class = "form-control", type = "password", name = "key", @id = "key", placeholder = "Password" })
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @style = "color:#1abc9c" })
+                                        
+                                    </div>
+                                    <div class="checkbox">
+                                        <span class="character-checkbox" onclick="showPassword()"></span>
+                                        <span class="label">Show password</span>
+                                    </div>
+                                    <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="SignIn">
+                                </form>
+
+                                <p style="color:#6d6d6d">
+                                    <a href="@Url.Action("Index", "Home")" class="btn btn-md" style="background-color:#1abc9c;color:white"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp; Back</a>
+                                    &nbsp;&nbsp;&nbsp; Don't have an account?<a href="@Url.Action("Signup", "Home")">Create</a>
+                                </p>
+                                <a href="@Url.Action("ForgotPassword", "Home")" class="forget">Forgot your password?</a>
+                                <hr>
+                            </div>
+                        }
+                    </div> <!-- /.col-xs-12 -->
+                </div> <!-- /.row -->
+            </div> <!-- /.container -->
+        </section>
+
+        <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Page © - 2017</p>
+                        <p>Powered by <strong><a href="http://www.aavitechsolutions.com/" target="_blank">AavitechSolutions</a></strong></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

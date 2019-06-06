@@ -1,0 +1,49 @@
+﻿@using WebApplication1.Models
+@model FormFieldModel
+@if (!Model.IsRunMode)
+{
+    <div id="TextBoxDiv" class="container col-md-12" style="background-color:#f7f6d4;height:80px;padding-top:18px;">
+        <div class="col-md-10">
+            <div class="container col-md-5">
+                <form id="TB">
+                    <div class="form-group">
+                        <br />
+                        <label>Upload a file</label><br /><br /><br />
+                        <input type="file" disabled="disabled" accept="file_extension|audio/*|video/*|image/*|media_type" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        @Html.Partial("_ButtonPanel", Model)
+    </div>
+}
+else
+{
+    <div class="form-row">
+        <label style="font-size:20px"><span>Upload Image</span></label>
+        @Html.TextBoxFor(model => model.FieldResponse, new { type = "file", @style = "padding-bottom: 50px;", @class = "form-control FileUploadtxt", accept = "file_extension|audio/*|video/*|image/*|media_type" })
+        <div class="FileReqTxt" style="color:red;font-size:12px"></div>
+         @*<input type="file" accept="file_extension|audio/*|video/*|image/*|media_type" />*@      
+    </div>
+ 
+
+    @*<div class="form-row">
+        <label>
+            <span>Upload Profile Picture</span>
+            <input type="file" accept="file_extension|audio/*|video/*|image/*|media_type" />
+        </label>
+    </div>*@
+
+    @*<div id="TextBoxDiv" class="container col-md-12" style="background-color:#f7f6d4;">
+        <div class="col-md-10">
+            <div class="container col-md-7">
+                <form id="TB">
+                    <div class="form-group">
+                         <label style="color:#1abc9c;font-size:16px">Upload Profile Picture</label><br />
+                        <input type="file" accept="file_extension|audio/*|video/*|image/*|media_type" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>*@
+}

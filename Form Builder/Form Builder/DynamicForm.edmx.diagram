@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="01b42c4136a949c6bc9dc1b6d1bd3a91" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="DynamicFormModel.Form" Width="1.5" PointX="3" PointY="4.75" />
+        <EntityTypeShape EntityType="DynamicFormModel.FormDetail" Width="1.5" PointX="5.25" PointY="4.625" />
+        <EntityTypeShape EntityType="DynamicFormModel.FormField" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="DynamicFormModel.Response" Width="1.5" PointX="8.25" PointY="4.75" />
+        <EntityTypeShape EntityType="DynamicFormModel.ResponseForm" Width="1.5" PointX="5.25" PointY="9" />
+        <EntityTypeShape EntityType="DynamicFormModel.User" Width="1.5" PointX="0.75" PointY="4.875" />
+        <AssociationConnector Association="DynamicFormModel.FK_Form_User" />
+        <AssociationConnector Association="DynamicFormModel.FK_FormDetail_Form" />
+        <AssociationConnector Association="DynamicFormModel.FK_Response_Form" />
+        <AssociationConnector Association="DynamicFormModel.FK_ResponseForm_Form" />
+        <AssociationConnector Association="DynamicFormModel.FK_FormDetail_FormField" />
+        <AssociationConnector Association="DynamicFormModel.FK_Response_FormField" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

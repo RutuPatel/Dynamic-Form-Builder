@@ -1,0 +1,50 @@
+﻿@using WebApplication1.Models
+@model FormFieldModel
+
+@if (!Model.IsRunMode)
+{
+<div id="TextAreaDiv" class="container col-md-12"  style="background-color:#f7f6d4;height:150px;padding-top:15px;">
+        <div class="col-md-10">
+            <div class="container col-md-5">
+                <form id="TA">
+                    <div class="form-group">
+                        <br />
+                        <label>Untitled</label><br />                       
+                        <textarea rows="4" cols="20" id="OnRun" class="form-control" disabled="disabled"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+        @Html.Partial("_ButtonPanel", Model)
+    </div>
+}
+else
+{
+    <div class="form-row">
+        <label><span style="font-size:20px">Textarea</span></label>
+        <div class="form-radio-buttons">
+            <div>
+                <label>
+
+                    @Html.TextAreaFor(model=>model.FieldResponse, new {placeholder = "Describe in 1-100 words", type = "text", @class = "form-control textAreaTxt", rows = "4", cols = "50" })
+                    <div class="textareaReqTxt" style="color:red;font-size:12px"></div>
+                      @*<textarea class="form-control"  rows="4" cols="50"  placeholder="Describe in 1-100 words" name="textarea"></textarea>*@
+                </label>
+            </div>           
+        </div>
+    </div>
+   
+
+    @*<div id="TextAreaDiv" class="container col-md-12" style="background-color:#f7f6d4;">
+        <div class="col-md-10">
+            <div class="container col-md-7">
+                <form id="TA">
+                    <div class="form-group">                       
+                        <label  style="color:#1abc9c;font-size:16px">Description</label><br />
+                        <textarea class="form-control" rows="4" cols="50" id="OnRun" placeholder="Describe in 1-100 words!!!"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>       
+    </div>*@
+}

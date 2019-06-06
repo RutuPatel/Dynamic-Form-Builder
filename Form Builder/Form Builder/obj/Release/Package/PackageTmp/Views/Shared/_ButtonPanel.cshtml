@@ -1,0 +1,17 @@
+﻿@using WebApplication1.Models
+@model FormFieldModel
+@if (!Model.IsRunMode)
+{
+<div class="container col-md-2">
+    <br /><br />
+    <a id="DeleteBtn" class="btn btn-danger delete btn-sm" href="#"><i class="glyphicon glyphicon-trash"></i></a>
+    <a id="AppendBtn" class="btn btn-success append btn-sm" onclick="GetContent('@Url.Action("GetField", "Home", new { type = Model.FieldType, fieldId = Model.Id })');return false;" style="background-color:forestgreen"><i class="glyphicon glyphicon-copy"></i></a>
+</div>  
+}
+<script>
+    $("a.delete").on("click", function (data) {
+        $(this).parents("div.editorRow:first").remove();
+        return false;
+    });
+</script>
+

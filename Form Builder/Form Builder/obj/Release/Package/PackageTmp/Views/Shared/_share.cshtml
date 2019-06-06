@@ -1,0 +1,44 @@
+﻿@using WebApplication1.Models
+@model FormModel
+
+@using (Html.BeginForm("MyForms", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="modal fade" id="@Model.HashUrl" tabindex="-1sss" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Share your form</h4>
+                </div>
+                <div class="modal-body" @*style="margin-left: 0px;margin-right:0px;"*@>
+
+                    <div class="form-group col-md-12">
+                        <div class="col-md-1"> <label>Url:</label></div>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(item => item.FormUrl, new { @class = "form-control", @placeholder = "your sharable link", @id = "txt" })
+                            @Html.ValidationMessageFor(item => item.FormUrl, "", new { @style = "color:#1abc9c" })
+                            <h6>Click on copy button and Ctrl+v on clipboard to share your url.</h6>
+                        </div>
+                        <div class="col-md-2"><button type="button" class="btn btn-md form-control" id="link" onclick="copy();" style="color:white">Copy</button></div>
+                        @*<input type="text" class="form-control" id="txt" placeholder="your sharable link" />*@
+                    </div>
+                    <div class="form-group col-md-12">
+                        <div class="col-md-1"><label>To:</label></div>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.Sharetoemail, new { @class = "form-control ShareEmailtxt", @placeholder = "Enter Email Address" })
+                            @Html.ValidationMessageFor(model => model.Sharetoemail, "", new { @style = "color:#1abc9c" })
+                            <div class="ShareReqTxt" style="color:red"></div>
+                            @*<input type="text" class="form-control" placeholder="Enter Email Address" />*@
+                        </div>
+                    </div>
+                    <br />
+                    <input type="submit" onclick="myFunction()" id="btn-Share" class="btn btn-primary" style="background-color:#4a90be; color:white; margin-left: 55px;" value="Share">
+                </div>
+            </div>
+        </div>
+    </div>
+}

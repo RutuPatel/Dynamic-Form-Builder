@@ -1,0 +1,87 @@
+﻿@model WebApplication1.Models.FormModel
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        #Submit {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+        }
+
+            #Submit:hover {
+                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+            }
+    </style>
+</head>
+<body>
+    @Html.Partial("BuilderNavbar")
+    <div class="col-md-12">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" style="padding-top: 100px;">
+                    @using (Html.BeginForm("Generateurl", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+
+                        <div class="col-md-6">
+                            <br />
+                            <img src="~/Resources/img/icon/URLEntry.gif" />
+                        </div>
+                        <div class="col-md-6">
+                            <h2 style="color:#1abc9c">Generate Url</h2>
+                            @Html.HiddenFor(model => model.FormId, new { @class = "form-control" })
+                            @Html.HiddenFor(model => model.FormDescription, new { @class = "form-control" })
+                            @Html.HiddenFor(model => model.FormUrl, new { @class = "form-control" })
+                            @Html.HiddenFor(model => model.FormName, new { @class = "form-control" })
+                            @Html.HiddenFor(model => model.HashUrl, new { @class = "form-control" })
+
+                            <p>Generate Url feature will  enable sharing feature of your form.<br /> You can now see the live preview of your form</p>
+                            
+                            <input type="submit" id="Submit" class="btn" value="Get Url">
+                        </div>
+                        
+                       
+                    }
+                </div> <!-- /.col-xs-12 -->
+            </div> <!-- /.row -->
+        </div> <!-- /.container -->
+    </div>
+</body>
+</html>
+@*<div class="container">
+    <div class="modal fade" id="ChangeUrlModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">change Url</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        @Html.HiddenFor(model=>model.FormId, new { @class = "form-control" })
+                        @Html.HiddenFor(model => model.FormDescription, new { @class = "form-control" })
+                        @Html.HiddenFor(model => model.FormUrl, new { @class = "form-control" })
+
+                        <label>Url:</label>
+                       @Html.DisplayFor(model=>model.FormName, new { @class = "form-control" })
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <input  type="submit" id="btn-change" class="btn btn-primary" style="background-color:#4a90be; color:white; margin-left: 55px;" value="Change">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>*@
